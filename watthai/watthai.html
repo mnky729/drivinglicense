@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temple by regions</title>
+  <style>
+    /* Container styles */
+    #temple.templeall {
+      background-image: url('background.jpg'); 
+      background-size: cover;
+      background-position: center;
+      padding: 20px;
+      display: grid;
+      gap: 20px;
+    }
+
+    /* Adjustable column layout */
+    .columns-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .columns-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .columns-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* Item styles */
+    #watthai.wat {
+      background-color: white;
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    /* Image cropping */
+    #imagewatthai.imagewatthai2 {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+  /* Text overlay */
+  .wat-name {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    /* Middle heading */
+    .heading-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .heading-container h1 {
+      font-size: 24px;
+      margin: 0;
+    }
+    .heading-container p {
+      font-size: 16px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="heading-container">
+    <h1>Temple by Regions</h1>
+    <p>ค้นหาข้อมูลวัดตามภูมิภาค</p>
+  </div>
+  
+  <div id="temple" class="templeall columns-3">
+    <div id="watthai" class="wat">
+      <img id="imagewatthai" class="imagewatthai2" src="image1.jpg" alt="Temple 1">
+    </div>
+    <div id="watthai" class="wat">
+      <img id="imagewatthai" class="imagewatthai2" src="image2.jpg" alt="Temple 2">
+
+    </div>
+    <div id="watthai" class="wat">
+      <img id="imagewatthai" class="imagewatthai2" src="image3.jpg" alt="Temple 3">
+
+    </div>
+    <div id="watthai" class="wat">
+        <img id="imagewatthai" class="imagewatthai2" src="image4.jpg" alt="Temple 4">
+      </div>
+  </div>
+
+  <div>
+    <button onclick="setColumns(2)">2 Columns</button>
+    <button onclick="setColumns(3)">3 Columns</button>
+    <button onclick="setColumns(4)">4 Columns</button>
+    <button onclick="toggleAutoplay()">Toggle Auto Play</button>
+  </div>
+
+  <script>
+    const temple = document.getElementById('temple');
+    let autoplay = false;
+    let interval;
+
+    function setColumns(count) {
+      temple.className = `templeall columns-${count}`;
+    }
+
+    function toggleAutoplay() {
+      autoplay = !autoplay;
+      if (autoplay) {
+        interval = setInterval(() => {
+          const currentColumns = parseInt(temple.className.match(/columns-(\d)/)[1], 10);
+          const nextColumns = currentColumns % 4 + 2;
+          setColumns(nextColumns);
+        }, 3000);
+      } else {
+        clearInterval(interval);
+      }
+    }
+  </script>
+</body>
+</html>
